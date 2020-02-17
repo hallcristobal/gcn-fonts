@@ -1,6 +1,4 @@
 extern crate image;
-#[macro_use]
-pub extern crate syn;
 extern crate proc_macro;
 extern crate rusttype;
 
@@ -26,12 +24,12 @@ pub struct GCNFont {
 pub fn work(params: Params) -> GCNFont {
     let (width, height) = params
         .resolution
-        .map(|r| (r.width.value() as u32, r.height.value() as u32))
+        .map(|r| (r.width, r.height))
         .unwrap_or((256, 256));
-    let size = params.size.map(|s| s.size.value() as f32).unwrap_or(50.0);
+    let size = params.size.map(|s| s.size).unwrap_or(50.0);
     let scale = Scale::uniform(size);
 
-    let font_data = fs::read(params.path.value()).unwrap();
+    let font_data = fs::read(params.path).unwrap();
     let font = Font::from_bytes(&font_data).expect("Error constructing Font");
     let mut atlas = GrayImage::new(width, height);
 
