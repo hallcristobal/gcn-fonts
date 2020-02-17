@@ -1,0 +1,10 @@
+[package]
+name = "worker"
+version = "0.1.0"
+authors = ["Christopher Serr <christopher.serr@gmail.com>"]
+
+[dependencies]
+syn = "0.14.7"
+quote = "0.6.5"
+image = { version = "0.19.0", default-features = false }
+rusttype = { version = "0.6.3", features = ["gpu_cache"] }
